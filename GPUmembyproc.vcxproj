@@ -124,7 +124,6 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="d3dkmthk.h" />
     <ClInclude Include="d3dkmtQueryStatistics.h" />
   </ItemGroup>
   <ItemGroup>
