@@ -23,6 +23,7 @@ PFND3DKMTQS queryD3DKMTStatistics;
 
 bool GetDXGIAdapter(IDXGIAdapter **aDXGIAdapter)
 {
+    *aDXGIAdapter = NULL;
     IDXGIFactory *factory = NULL;
     CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)&factory);
     IDXGIAdapter *a1;
@@ -33,12 +34,12 @@ bool GetDXGIAdapter(IDXGIAdapter **aDXGIAdapter)
         a1->QueryInterface(__uuidof(IDXGIAdapter), (void **)&a2);
         DXGI_ADAPTER_DESC desc;
         a2->GetDesc(&desc);
-		if (wcsstr(desc.Description, L"NVIDIA") || wcsstr(desc.Description, L"ATI"))
-			*aDXGIAdapter = a2;
+        if (wcsstr(desc.Description, L"NVIDIA") || wcsstr(desc.Description, L"ATI"))
+            *aDXGIAdapter = a2;
     }
 
     factory->Release();
-    return i > 0;
+    return *aDXGIAdapter != NULL;
 }
 
 OSVERSIONINFOEX getWindowsVersionInfo()
