@@ -33,7 +33,8 @@ bool GetDXGIAdapter(IDXGIAdapter **aDXGIAdapter)
         a1->QueryInterface(__uuidof(IDXGIAdapter), (void **)&a2);
         DXGI_ADAPTER_DESC desc;
         a2->GetDesc(&desc);
-        *aDXGIAdapter = a2;
+		if (wcsstr(desc.Description, L"NVIDIA") || wcsstr(desc.Description, L"ATI"))
+			*aDXGIAdapter = a2;
     }
 
     factory->Release();
